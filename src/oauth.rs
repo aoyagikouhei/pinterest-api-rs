@@ -1,5 +1,11 @@
 use oauth2::{
-    basic::{BasicClient, BasicErrorResponse, BasicRevocationErrorResponse, BasicTokenIntrospectionResponse, BasicTokenResponse, BasicTokenType}, reqwest::async_http_client, AuthUrl, AuthorizationCode, Client, ClientId, ClientSecret, CsrfToken, EmptyExtraTokenFields, ExtraTokenFields, RedirectUrl, Scope, StandardRevocableToken, StandardTokenResponse, TokenResponse, TokenUrl
+    basic::{
+        BasicErrorResponse, BasicRevocationErrorResponse, BasicTokenIntrospectionResponse,
+        BasicTokenType,
+    },
+    reqwest::async_http_client,
+    AuthUrl, AuthorizationCode, Client, ClientId, ClientSecret, CsrfToken, ExtraTokenFields,
+    RedirectUrl, Scope, StandardRevocableToken, StandardTokenResponse, TokenResponse, TokenUrl,
 };
 use serde::{Deserialize, Serialize};
 use std::time::Duration;
@@ -182,11 +188,7 @@ impl Oauth {
         }
     }
 
-    pub async fn token(
-        &self,
-        pkce_verifier_str: &str,
-        code: &str,
-    ) -> Result<TokenResult, Error> {
+    pub async fn token(&self, pkce_verifier_str: &str, code: &str) -> Result<TokenResult, Error> {
         let pkce_verifier = oauth2::PkceCodeVerifier::new(pkce_verifier_str.to_owned());
 
         let token = self
@@ -203,7 +205,7 @@ impl Oauth {
             token_type: token.token_type().as_ref().to_string(),
             refresh_token: token.refresh_token().map(|it| it.secret().to_string()),
             expires_in: token.expires_in(),
-            extra: token.extra_fields().clone()
+            extra: token.extra_fields().clone(),
         })
     }
 }

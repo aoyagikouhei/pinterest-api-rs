@@ -1,11 +1,10 @@
-use std::collections::HashMap;
 use reqwest::{RequestBuilder, StatusCode};
 use serde::de::DeserializeOwned;
+use std::collections::HashMap;
 
 use crate::error::{Error, ErrorResponse};
 
 pub mod get_boards;
-
 
 #[derive(Debug)]
 pub struct ApiResponse<T> {
@@ -20,7 +19,11 @@ where
 {
     let response = builder.send().await?;
     let status_code = response.status();
-    let header = response.headers().iter().map(|(k, v)| (k.to_string(), v.to_str().unwrap().to_string())).collect();
+    let header = response
+        .headers()
+        .iter()
+        .map(|(k, v)| (k.to_string(), v.to_str().unwrap().to_string()))
+        .collect();
     let text = match response.text().await {
         Ok(text) => text,
         Err(err) => return Err(Error::Other(format!("{:?}", err), status_code)),
@@ -30,7 +33,13 @@ where
         Err(_err) => return Err(Error::Other(text, status_code)),
     };
     if let Some(code) = json["code"].as_i64() {
-        return Err(Error::Api(ErrorResponse{code, message: json["message"].as_str().unwrap_or_default().to_owned()}, status_code));
+        return Err(Error::Api(
+            ErrorResponse {
+                code,
+                message: json["message"].as_str().unwrap_or_default().to_owned(),
+            },
+            status_code,
+        ));
     }
     match serde_json::from_value::<T>(json) {
         Ok(json) => Ok(ApiResponse {

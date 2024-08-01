@@ -1,8 +1,11 @@
+use crate::error::Error;
 use reqwest::RequestBuilder;
 use serde::{Deserialize, Serialize};
-use crate::error::Error;
 
-use crate::{options::{apply_options, make_url, ApiOptions}, response::board::Board};
+use crate::{
+    options::{apply_options, make_url, ApiOptions},
+    response::board::Board,
+};
 
 use super::{execute_api, ApiResponse};
 
