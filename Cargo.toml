@@ -13,3 +13,8 @@ thiserror = "1"
 [features]
 default = ["reqwest/default-tls"]
 rustls-tls = ["reqwest/rustls-tls"]
+
+[dev-dependencies]
+anyhow = "1"
+mockito = "1.4"
+tokio = { version = "1", features = ["macros"] }

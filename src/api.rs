@@ -5,6 +5,7 @@ use std::collections::HashMap;
 use crate::error::{Error, ErrorResponse};
 
 pub mod get_boards;
+pub mod get_user_account;
 
 #[derive(Debug)]
 pub struct ApiResponse<T> {
@@ -47,6 +48,6 @@ where
             status_code,
             header,
         }),
-        Err(err) => Err(Error::Other(format!("{:?}", err), status_code)),
+        Err(err) => Err(Error::Other(format!("{:?},{}", err, text), status_code)),
     }
 }
