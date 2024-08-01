@@ -1,0 +1,13 @@
+[package]
+name = "oauth-web"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = "0.7"
+chrono = { version = "0.4", features = [ "serde" ] }
+serde = { version = "1", features = ["derive"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+tower-cookies = "0.10"
+pinterest-api = { path="../..", features = ["rustls-tls"], default-features = false }
+url = "2.5"

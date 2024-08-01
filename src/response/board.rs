@@ -32,7 +32,7 @@ pub struct Board {
     created_at: String,
     board_pins_modified_at: String,
     name: String,
-    description: Option<String>,
+    description: String,
     collaborator_count: u64,
     pin_count: u64,
     follower_count: u64,
@@ -43,7 +43,7 @@ pub struct Board {
 
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct Media {
-    image_cover_url: String,
+    image_cover_url: Option<String>,
     pin_thumbnail_urls: Vec<String>,
 }
 
