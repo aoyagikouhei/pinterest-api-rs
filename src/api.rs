@@ -5,6 +5,7 @@ use std::collections::HashMap;
 use crate::error::{Error, ErrorResponse};
 
 pub mod get_boards;
+pub mod get_pins;
 pub mod get_user_account;
 
 #[derive(Debug)]
