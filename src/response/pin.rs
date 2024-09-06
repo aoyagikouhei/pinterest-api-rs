@@ -2,6 +2,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::response::creative_type::CreativeType;
 
+use super::media::Media;
+
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Pin {
     pub id: String,
@@ -16,7 +18,7 @@ pub struct Pin {
     pub board_section_id: Option<String>,
     pub board_owner: BoardOwner,
     pub is_owner: bool,
-    pub media: serde_json::Value,
+    pub media: Media,
     pub parent_pin_id: Option<String>,
     pub is_standard: bool,
     pub has_been_promoted: bool,

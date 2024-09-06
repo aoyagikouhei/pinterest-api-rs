@@ -6,7 +6,7 @@ use crate::{
     error::Error,
     options::{apply_options, make_url, ApiOptions},
     parameter::{creative_type::CreativeType, pin_filter::PinFilter, pin_type::PinType,},
-    response::board::Board,
+    response::pin::Pin,
 };
 
 const URL_PATH: &str = "/pins";
@@ -112,7 +112,7 @@ impl Api {
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Response {
-    pub items: Vec<Board>,
+    pub items: Vec<Pin>,
     pub bookmark: Option<String>,
 }
 
@@ -120,10 +120,10 @@ pub struct Response {
 mod tests {
     use super::*;
 
-    // BEARER_CODE=xxx cargo test test_get_boards -- --nocapture --test-threads=1
+    // BEARER_CODE=xxx cargo test test_get_pins -- --nocapture --test-threads=1
 
     #[tokio::test]
-    async fn test_get_boards() {
+    async fn test_get_pins() {
         let bearer_code = std::env::var("BEARER_CODE").unwrap_or_default();
         let response = Api::new(None)
             .execute(bearer_code.as_str())

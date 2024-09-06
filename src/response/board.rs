@@ -36,13 +36,13 @@ pub struct Board {
     collaborator_count: i64,
     pin_count: i64,
     follower_count: i64,
-    media: Media,
+    media: BoardMedia,
     owner: Owner,
     privacy: Privacy,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
-pub struct Media {
+pub struct BoardMedia {
     image_cover_url: Option<String>,
     pin_thumbnail_urls: Vec<String>,
 }
