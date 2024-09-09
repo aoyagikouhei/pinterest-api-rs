@@ -1,3 +1,4 @@
+pub mod carousel_slot;
 pub mod creative_type;
 pub mod media_source;
 pub mod pin_filter;
