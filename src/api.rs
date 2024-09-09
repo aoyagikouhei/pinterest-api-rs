@@ -6,6 +6,7 @@ use crate::error::{Error, ErrorResponse};
 
 pub mod get_boards;
 pub mod get_pins;
+pub mod get_pins_pin_id;
 pub mod get_user_account;
 pub mod post_boards;
 pub mod post_pins;
