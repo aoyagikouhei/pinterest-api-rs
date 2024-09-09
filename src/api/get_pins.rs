@@ -5,7 +5,7 @@ use crate::{
     api::{execute_api, ApiResponse},
     error::Error,
     options::{apply_options, make_url, ApiOptions},
-    parameter::{creative_type::CreativeType, pin_filter::PinFilter, pin_type::PinType,},
+    parameter::{creative_type::CreativeType, pin_filter::PinFilter, pin_type::PinType},
     response::pin::Pin,
 };
 
@@ -93,7 +93,14 @@ impl Api {
             query_parameters.push(("pin_type", pin_type.to_string()));
         }
         if let Some(creative_types) = self.cretive_types {
-            query_parameters.push(("creative_types", creative_types.iter().map(|x| x.to_string()).collect::<Vec<String>>().join(",")));
+            query_parameters.push((
+                "creative_types",
+                creative_types
+                    .iter()
+                    .map(|x| x.to_string())
+                    .collect::<Vec<String>>()
+                    .join(","),
+            ));
         }
         if let Some(pin_metrics) = self.pin_metrics {
             query_parameters.push(("pin_metrics", pin_metrics.to_string()));
@@ -125,10 +132,7 @@ mod tests {
     #[tokio::test]
     async fn test_get_pins() {
         let bearer_code = std::env::var("BEARER_CODE").unwrap_or_default();
-        let response = Api::new(None)
-            .execute(bearer_code.as_str())
-            .await
-            .unwrap();
+        let response = Api::new(None).execute(bearer_code.as_str()).await.unwrap();
         println!("{:?}", response);
     }
 }

@@ -30,4 +30,3 @@ pub struct Pin {
 pub struct BoardOwner {
     pub username: String,
 }
-

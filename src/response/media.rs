@@ -1,12 +1,12 @@
 use serde::{Deserialize, Serialize};
 
-use super::{images::Images, mixed_item::MixedItem,};
+use super::{images::Images, mixed_item::MixedItem};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(tag = "media_type")]
 #[serde(rename_all = "snake_case")]
 pub enum Media {
-    Image{
+    Image {
         images: Images,
     },
     Video {
@@ -29,7 +29,6 @@ pub enum Media {
         items: Vec<MixedItem>,
         images: Images,
     },
-
 }
 
 #[cfg(test)]
@@ -40,11 +39,19 @@ mod tests {
 
     #[tokio::test]
     async fn test_response_media_json() {
-        let image = Media::Image{images: Images{..Default::default()}};
+        let image = Media::Image {
+            images: Images {
+                ..Default::default()
+            },
+        };
         println!("{}", serde_json::to_string(&image).unwrap());
 
-        let multiple_images = Media::MultipleImages { items: vec![], images: Images{..Default::default()} };
+        let multiple_images = Media::MultipleImages {
+            items: vec![],
+            images: Images {
+                ..Default::default()
+            },
+        };
         println!("{}", serde_json::to_string(&multiple_images).unwrap());
     }
 }
-

@@ -18,5 +18,5 @@ pub enum MixedItem {
         duration: i64,
         height: i64,
         width: i64,
-    }
+    },
 }

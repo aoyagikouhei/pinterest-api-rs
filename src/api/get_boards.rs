@@ -89,10 +89,7 @@ mod tests {
     #[tokio::test]
     async fn test_get_boards() {
         let bearer_code = std::env::var("BEARER_CODE").unwrap_or_default();
-        let response = Api::new(None)
-            .execute(bearer_code.as_str())
-            .await
-            .unwrap();
+        let response = Api::new(None).execute(bearer_code.as_str()).await.unwrap();
         println!("{:?}", response);
     }
 }

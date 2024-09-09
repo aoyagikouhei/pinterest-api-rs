@@ -69,7 +69,7 @@ mod tests {
         let body = Body {
             name: "test".to_owned(),
             description: Some("テストです".to_owned()),
-            privacy: PrivacyPost::Public
+            privacy: PrivacyPost::Public,
         };
         let response = Api::new(None, body)
             .execute(bearer_code.as_str())

@@ -6,7 +6,7 @@ use crate::{
     error::Error,
     options::{apply_options, make_url, ApiOptions},
     parameter::media_source::MediaSource,
-    response::{board::Board, pin::Pin},
+    response::pin::Pin,
 };
 
 const URL_PATH: &str = "/pins";

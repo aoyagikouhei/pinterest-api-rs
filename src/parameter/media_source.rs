@@ -30,7 +30,7 @@ pub enum MediaSource {
     },
     PinUrl {
         is_affiliate_link: bool,
-    }
+    },
 }
 
 impl Default for MediaSource {
@@ -41,7 +41,6 @@ impl Default for MediaSource {
         }
     }
 }
-
 
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct MultipleImageBase64Item {
