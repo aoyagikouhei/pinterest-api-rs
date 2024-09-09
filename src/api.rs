@@ -12,6 +12,7 @@ pub mod get_user_account;
 pub mod patch_pins_pid_id;
 pub mod post_boards;
 pub mod post_pins;
+pub mod post_pins_pid_id_save;
 
 #[derive(Debug)]
 pub struct ApiResponse<T> {
