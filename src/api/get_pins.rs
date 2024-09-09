@@ -1,12 +1,11 @@
 use reqwest::RequestBuilder;
-use serde::{Deserialize, Serialize};
 
 use crate::{
     api::{execute_api, ApiResponse},
     error::Error,
     options::{apply_options, make_url, ApiOptions},
     parameter::{creative_type::CreativeType, pin_filter::PinFilter, pin_type::PinType},
-    response::pin::Pin,
+    response::{list_response::ListResponse, pin::Pin},
 };
 
 const URL_PATH: &str = "/pins";
@@ -112,15 +111,9 @@ impl Api {
         apply_options(client, &self.options)
     }
 
-    pub async fn execute(self, bearer_code: &str) -> Result<ApiResponse<Response>, Error> {
+    pub async fn execute(self, bearer_code: &str) -> Result<ApiResponse<ListResponse<Pin>>, Error> {
         execute_api(self.build(bearer_code)).await
     }
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Response {
-    pub items: Vec<Pin>,
-    pub bookmark: Option<String>,
 }
 
 #[cfg(test)]

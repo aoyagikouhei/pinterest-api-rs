@@ -1,12 +1,11 @@
 use reqwest::RequestBuilder;
-use serde::{Deserialize, Serialize};
 
 use crate::{
     api::{execute_api, ApiResponse},
     error::Error,
     options::{apply_options, make_url, ApiOptions},
     parameter::privacy::Privacy,
-    response::board::Board,
+    response::{board::Board, list_response::ListResponse},
 };
 
 const URL_PATH: &str = "/boards";
@@ -69,15 +68,12 @@ impl Api {
         apply_options(client, &self.options)
     }
 
-    pub async fn execute(self, bearer_code: &str) -> Result<ApiResponse<Response>, Error> {
+    pub async fn execute(
+        self,
+        bearer_code: &str,
+    ) -> Result<ApiResponse<ListResponse<Board>>, Error> {
         execute_api(self.build(bearer_code)).await
     }
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Response {
-    pub items: Vec<Board>,
-    pub bookmark: Option<String>,
 }
 
 #[cfg(test)]
