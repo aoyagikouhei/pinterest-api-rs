@@ -4,6 +4,7 @@ use std::collections::HashMap;
 
 use crate::error::{Error, ErrorResponse};
 
+pub mod delete_pins_pin_id;
 pub mod get_boards;
 pub mod get_pins;
 pub mod get_pins_pin_id;
@@ -54,4 +55,44 @@ where
         }),
         Err(err) => Err(Error::Other(format!("{:?},{}", err, text), status_code)),
     }
+}
+
+#[derive(Debug)]
+pub struct ApiEmptyResponse {
+    pub status_code: StatusCode,
+    pub header: HashMap<String, String>,
+}
+
+pub async fn execute_empty_api(builder: RequestBuilder) -> Result<ApiEmptyResponse, Error> {
+    let response = builder.send().await?;
+    let status_code = response.status();
+    let header = response
+        .headers()
+        .iter()
+        .map(|(k, v)| (k.to_string(), v.to_str().unwrap().to_string()))
+        .collect();
+    let text = match response.text().await {
+        Ok(text) => text,
+        Err(err) => return Err(Error::Other(format!("{:?}", err), status_code)),
+    };
+    if text.is_empty() {
+        return Ok(ApiEmptyResponse {
+            status_code,
+            header,
+        });
+    }
+    let json = match serde_json::from_str::<serde_json::Value>(&text) {
+        Ok(json) => json,
+        Err(_err) => return Err(Error::Other(text, status_code)),
+    };
+    if let Some(code) = json["code"].as_i64() {
+        return Err(Error::Api(
+            ErrorResponse {
+                code,
+                message: json["message"].as_str().unwrap_or_default().to_owned(),
+            },
+            status_code,
+        ));
+    }
+    Err(Error::Other(text, status_code))
 }
