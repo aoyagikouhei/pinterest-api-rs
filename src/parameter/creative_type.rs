@@ -9,7 +9,6 @@ pub enum CreativeType {
     Shopping,
     Carousel,
     MaxVideo,
-    ShopThePin,
     Collection,
     Idea,
 }
@@ -22,7 +21,6 @@ impl fmt::Display for CreativeType {
             Self::Shopping => write!(f, "SHOPPING"),
             Self::Carousel => write!(f, "CAROUSEL"),
             Self::MaxVideo => write!(f, "MAX_VIDEO"),
-            Self::ShopThePin => write!(f, "SHOP_THE_PIN"),
             Self::Collection => write!(f, "COLLECTION"),
             Self::Idea => write!(f, "IDEA"),
         }
