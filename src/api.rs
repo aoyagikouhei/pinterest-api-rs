@@ -16,6 +16,7 @@ pub mod get_user_account;
 pub mod patch_boards_board_id;
 pub mod patch_pins_pid_id;
 pub mod post_boards;
+pub mod post_boards_board_id_sections;
 pub mod post_pins;
 pub mod post_pins_pid_id_save;
 
