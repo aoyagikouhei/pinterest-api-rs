@@ -12,7 +12,7 @@ const URL_PATH: &str = "/boards";
 #[derive(Debug, Clone, Default)]
 pub struct Api {
     options: Option<ApiOptions>,
-    boarde_id: String,
+    board_id: String,
     ad_account_id: Option<String>,
 }
 
@@ -20,7 +20,7 @@ impl Api {
     pub fn new(options: Option<ApiOptions>, board_id: &str) -> Self {
         Self {
             options,
-            boarde_id: board_id.to_string(),
+            board_id: board_id.to_string(),
             ..Default::default()
         }
     }
@@ -37,7 +37,7 @@ impl Api {
         }
         let client = reqwest::Client::new()
             .delete(make_url(
-                &format!("{}/{}", URL_PATH, self.boarde_id),
+                &format!("{}/{}", URL_PATH, self.board_id),
                 &self.options,
             ))
             .query(&query_parameters)
