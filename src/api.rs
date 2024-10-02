@@ -5,6 +5,7 @@ use std::collections::HashMap;
 use crate::error::{Error, ErrorResponse};
 
 pub mod delete_boards_board_id;
+pub mod delete_boards_board_id_sections_section_id;
 pub mod delete_pins_pin_id;
 pub mod get_boards;
 pub mod get_boards_board_id;
