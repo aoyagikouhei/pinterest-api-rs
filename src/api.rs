@@ -9,6 +9,7 @@ pub mod delete_pins_pin_id;
 pub mod get_boards;
 pub mod get_boards_board_id;
 pub mod get_boards_board_id_pins;
+pub mod get_boards_board_id_sections;
 pub mod get_pins;
 pub mod get_pins_pin_id;
 pub mod get_user_account;

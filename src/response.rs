@@ -1,4 +1,5 @@
 pub mod board;
+pub mod board_section;
 pub mod creative_type;
 pub mod images;
 pub mod list_response;
