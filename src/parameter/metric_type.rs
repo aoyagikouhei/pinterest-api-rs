@@ -16,20 +16,16 @@ impl Default for MetricTypes {
 impl ToString for MetricTypes {
     fn to_string(&self) -> String {
         match self {
-            Self::Standard(metric_types) => {
-                metric_types
-                    .iter()
-                    .map(|metric_type| metric_type.to_string())
-                    .collect::<Vec<String>>()
-                    .join(",")
-            }
-            Self::Video(metric_types) => {
-                metric_types
-                    .iter()
-                    .map(|metric_type| metric_type.to_string())
-                    .collect::<Vec<String>>()
-                    .join(",")
-            }
+            Self::Standard(metric_types) => metric_types
+                .iter()
+                .map(|metric_type| metric_type.to_string())
+                .collect::<Vec<String>>()
+                .join(","),
+            Self::Video(metric_types) => metric_types
+                .iter()
+                .map(|metric_type| metric_type.to_string())
+                .collect::<Vec<String>>()
+                .join(","),
         }
     }
 }
@@ -69,7 +65,6 @@ impl Default for StandardMetricType {
         Self::Impression
     }
 }
-
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE")]

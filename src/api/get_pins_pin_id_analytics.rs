@@ -1,7 +1,14 @@
 use reqwest::RequestBuilder;
 
 use crate::{
-    api::{execute_api, ApiResponse}, error::Error, options::{apply_options, make_url, ApiOptions}, parameter::{app_type::AppType, metric_type::{self, MetricTypes}, split_field::SplitField}, response::pin::Pin
+    api::{execute_api, ApiResponse},
+    error::Error,
+    options::{apply_options, make_url, ApiOptions},
+    parameter::{
+        app_type::AppType,
+        metric_type::MetricTypes,
+        split_field::SplitField,
+    },
 };
 
 #[derive(Debug, Clone, Default)]
@@ -17,7 +24,13 @@ pub struct Api {
 }
 
 impl Api {
-    pub fn new(options: Option<ApiOptions>, pin_id: &str, start_date: &str, end_date: &str, metric_types: MetricTypes) -> Self {
+    pub fn new(
+        options: Option<ApiOptions>,
+        pin_id: &str,
+        start_date: &str,
+        end_date: &str,
+        metric_types: MetricTypes,
+    ) -> Self {
         Self {
             options,
             pin_id: pin_id.to_string(),
@@ -74,6 +87,8 @@ impl Api {
 
 #[cfg(test)]
 mod tests {
+    use crate::parameter::metric_type;
+
     use super::*;
 
     // BEARER_CODE=xxx PIN_ID=XXX cargo test test_get_pins_pin_id_analytics -- --nocapture --test-threads=1
@@ -82,9 +97,8 @@ mod tests {
     async fn test_get_pins_pin_id_analytics() {
         let bearer_code = std::env::var("BEARER_CODE").unwrap_or_default();
         let pin_id = std::env::var("PIN_ID").unwrap_or_default();
-        let metric_types = metric_type::MetricTypes::Standard(vec![
-            metric_type::StandardMetricType::Impression,
-        ]);
+        let metric_types =
+            metric_type::MetricTypes::Standard(vec![metric_type::StandardMetricType::Impression]);
         let response = Api::new(None, &pin_id, "2000-01-01", "2001-01-01", metric_types)
             .execute(bearer_code.as_str())
             .await
