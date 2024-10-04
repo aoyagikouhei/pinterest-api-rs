@@ -2,6 +2,14 @@
 name = "pinterest-api"
 version = "0.1.0"
 edition = "2021"
+authors = ["aoyagikouhei <aoyagi.kouhei@gmail.com>"]
+license = "MIT"
+description = "Pinterest API library."
+repository = "https://github.com/aoyagikouhei/pinterest-api-rs"
+keywords = ["pintrest", "api", "client", "oauth"]
+categories = ["api-bindings"]
+readme = "README.md"
+documentation = "https://docs.rs/pinterest-api"
 
 [dependencies]
 oauth2 = "4"
