@@ -4,11 +4,7 @@ use crate::{
     api::{execute_api, ApiResponse},
     error::Error,
     options::{apply_options, make_url, ApiOptions},
-    parameter::{
-        app_type::AppType,
-        metric_type::MetricTypes,
-        split_field::SplitField,
-    },
+    parameter::{app_type::AppType, metric_type::MetricTypes, split_field::SplitField},
 };
 
 #[derive(Debug, Clone, Default)]

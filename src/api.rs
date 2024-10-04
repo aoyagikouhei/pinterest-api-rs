@@ -12,6 +12,8 @@ pub mod get_boards_board_id;
 pub mod get_boards_board_id_pins;
 pub mod get_boards_board_id_sections;
 pub mod get_boards_board_id_sections_section_id_pins;
+pub mod get_media;
+pub mod get_media_media_id;
 pub mod get_pins;
 pub mod get_pins_pin_id;
 pub mod get_pins_pin_id_analytics;
@@ -21,6 +23,7 @@ pub mod patch_boards_board_id_sections_section_id;
 pub mod patch_pins_pid_id;
 pub mod post_boards;
 pub mod post_boards_board_id_sections;
+pub mod post_media;
 pub mod post_pins;
 pub mod post_pins_pid_id_save;
 

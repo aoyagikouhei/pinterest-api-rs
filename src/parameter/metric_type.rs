@@ -13,9 +13,9 @@ impl Default for MetricTypes {
     }
 }
 
-impl ToString for MetricTypes {
-    fn to_string(&self) -> String {
-        match self {
+impl std::fmt::Display for MetricTypes {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let result = match self {
             Self::Standard(metric_types) => metric_types
                 .iter()
                 .map(|metric_type| metric_type.to_string())
@@ -26,7 +26,8 @@ impl ToString for MetricTypes {
                 .map(|metric_type| metric_type.to_string())
                 .collect::<Vec<String>>()
                 .join(","),
-        }
+        };
+        write!(f, "{}", result)
     }
 }
 
