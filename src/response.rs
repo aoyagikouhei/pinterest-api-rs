@@ -1,3 +1,4 @@
+pub mod analytics;
 pub mod board;
 pub mod board_section;
 pub mod creative_type;

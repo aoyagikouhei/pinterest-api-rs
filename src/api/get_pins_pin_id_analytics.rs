@@ -4,7 +4,7 @@ use crate::{
     api::{execute_api, ApiResponse},
     error::Error,
     options::{apply_options, make_url, ApiOptions},
-    parameter::{app_type::AppType, metric_type::MetricTypes, split_field::SplitField},
+    parameter::{app_type::AppType, metric_type::MetricTypes, split_field::SplitField}, response::analytics::Analytics,
 };
 
 #[derive(Debug, Clone, Default)]
@@ -76,7 +76,7 @@ impl Api {
         apply_options(client, &self.options)
     }
 
-    pub async fn execute(self, bearer_code: &str) -> Result<ApiResponse<serde_json::Value>, Error> {
+    pub async fn execute(self, bearer_code: &str) -> Result<ApiResponse<Analytics>, Error> {
         execute_api(self.build(bearer_code)).await
     }
 }
