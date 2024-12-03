@@ -13,9 +13,9 @@ pub enum Media {
         images: Images,
         cover_image_url: String,
         video_url: Option<String>,
-        duration: i64,
-        hegith: i64,
-        width: i64,
+        duration: Option<i64>,
+        hegith: Option<i64>,
+        width: Option<i64>,
     },
     MultipleImages {
         items: Vec<MixedItem>,
