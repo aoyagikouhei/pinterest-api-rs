@@ -1,6 +1,6 @@
-use serde::{Deserialize, Serialize};
-
 use super::images::Images;
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap as Map;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(tag = "item_type")]
@@ -10,7 +10,10 @@ pub enum MixedItem {
         title: Option<String>,
         description: Option<String>,
         link: Option<String>,
-        images: Images,
+        images: Box<Images>,
+
+        #[serde(flatten, skip_serializing_if = "Map::is_empty")]
+        extra: Map<String, serde_json::Value>,
     },
     Video {
         cover_image_url: String,
@@ -18,5 +21,8 @@ pub enum MixedItem {
         duration: i64,
         height: i64,
         width: i64,
+
+        #[serde(flatten, skip_serializing_if = "Map::is_empty")]
+        extra: Map<String, serde_json::Value>,
     },
 }

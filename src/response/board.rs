@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap as Map;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE")]
@@ -28,26 +29,35 @@ impl Default for Privacy {
 
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct Board {
-    id: String,
-    created_at: String,
-    board_pins_modified_at: String,
-    name: String,
-    description: Option<String>,
-    collaborator_count: i64,
-    pin_count: i64,
-    follower_count: i64,
-    media: BoardMedia,
-    owner: Owner,
-    privacy: Privacy,
+    pub id: String,
+    pub created_at: String,
+    pub board_pins_modified_at: String,
+    pub name: String,
+    pub description: Option<String>,
+    pub collaborator_count: i64,
+    pub pin_count: i64,
+    pub follower_count: i64,
+    pub media: BoardMedia,
+    pub owner: Owner,
+    pub privacy: Privacy,
+
+    #[serde(flatten, skip_serializing_if = "Map::is_empty")]
+    pub extra: Map<String, serde_json::Value>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct BoardMedia {
-    image_cover_url: Option<String>,
-    pin_thumbnail_urls: Vec<String>,
+    pub image_cover_url: Option<String>,
+    pub pin_thumbnail_urls: Vec<String>,
+
+    #[serde(flatten, skip_serializing_if = "Map::is_empty")]
+    pub extra: Map<String, serde_json::Value>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct Owner {
-    username: String,
+    pub username: String,
+
+    #[serde(flatten, skip_serializing_if = "Map::is_empty")]
+    pub extra: Map<String, serde_json::Value>,
 }

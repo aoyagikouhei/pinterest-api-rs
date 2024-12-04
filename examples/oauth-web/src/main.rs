@@ -5,7 +5,7 @@ use axum::{
     Router,
 };
 use std::collections::HashMap;
-use pinterest_api::{api::get_boards, oauth::{OAuthScope, Oauth}};
+use pinterest_api::{api::get_pins, oauth::{OAuthScope, Oauth}};
 use tower_cookies::{Cookie, CookieManagerLayer, Cookies};
 use url::Url;
 
@@ -45,9 +45,9 @@ async fn oauth(uri: Uri, cookies: Cookies) -> impl IntoResponse {
     let oauth = oauth_client();
     let res = oauth.token(pkce.value(), hash_query.get("code").unwrap()).await.unwrap();
     println!("{:?}", res);
-    let result = get_boards::Api::new(None)
+    let result = get_pins::Api::new(None)
         .execute(&res.access_token)
-        .await;
-    println!("{:?}", result);
+        .await.unwrap();
+    println!("{}", serde_json::to_string_pretty(&result.body).unwrap());
     "success".into_response()
 }

@@ -1,8 +1,7 @@
-use serde::{Deserialize, Serialize};
-
-use crate::response::creative_type::CreativeType;
-
 use super::media::Media;
+use crate::response::creative_type::CreativeType;
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap as Map;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Pin {
@@ -24,9 +23,15 @@ pub struct Pin {
     pub has_been_promoted: bool,
     pub note: Option<String>,
     pub pin_metrics: Option<serde_json::Value>,
+
+    #[serde(flatten, skip_serializing_if = "Map::is_empty")]
+    pub extra: Map<String, serde_json::Value>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct BoardOwner {
     pub username: String,
+
+    #[serde(flatten, skip_serializing_if = "Map::is_empty")]
+    pub extra: Map<String, serde_json::Value>,
 }

@@ -1,17 +1,21 @@
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap as Map;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct UserAccount {
-    account_type: String,
-    id: String,
-    profile_image: String,
-    website_url: String,
-    username: String,
-    about: String,
-    business_name: Option<String>,
-    board_count: Option<i64>,
-    pin_count: Option<i64>,
-    follower_count: Option<i64>,
-    following_count: Option<i64>,
-    monthly_views: Option<i64>,
+    pub account_type: String,
+    pub id: String,
+    pub profile_image: String,
+    pub website_url: String,
+    pub username: String,
+    pub about: String,
+    pub business_name: Option<String>,
+    pub board_count: Option<i64>,
+    pub pin_count: Option<i64>,
+    pub follower_count: Option<i64>,
+    pub following_count: Option<i64>,
+    pub monthly_views: Option<i64>,
+
+    #[serde(flatten, skip_serializing_if = "Map::is_empty")]
+    pub extra: Map<String, serde_json::Value>,
 }

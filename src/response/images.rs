@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap as Map;
 
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct Images {
@@ -10,6 +11,9 @@ pub struct Images {
     pub size_600x: Image,
     #[serde(rename = "1200x")]
     pub size_1200x: Image,
+
+    #[serde(flatten, skip_serializing_if = "Map::is_empty")]
+    pub extra: Map<String, serde_json::Value>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
@@ -17,4 +21,7 @@ pub struct Image {
     pub width: i64,
     pub height: i64,
     pub url: String,
+
+    #[serde(flatten, skip_serializing_if = "Map::is_empty")]
+    pub extra: Map<String, serde_json::Value>,
 }

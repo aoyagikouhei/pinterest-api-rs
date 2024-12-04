@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap as Map;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 #[serde(rename_all = "lowercase")]
@@ -62,6 +63,9 @@ pub struct UploadParameters {
     pub x_amz_credential: String,
     #[serde(rename = "Content-Type")]
     pub content_type: String,
+
+    #[serde(flatten, skip_serializing_if = "Map::is_empty")]
+    pub extra: Map<String, serde_json::Value>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
@@ -69,6 +73,9 @@ pub struct MediaGetResponse {
     pub media_id: String,
     pub media_type: MediaType,
     pub status: Status,
+
+    #[serde(flatten, skip_serializing_if = "Map::is_empty")]
+    pub extra: Map<String, serde_json::Value>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
@@ -77,4 +84,7 @@ pub struct MediaPostResponse {
     pub media_type: MediaType,
     pub upload_url: Status,
     pub upload_parameters: UploadParameters,
+
+    #[serde(flatten, skip_serializing_if = "Map::is_empty")]
+    pub extra: Map<String, serde_json::Value>,
 }
